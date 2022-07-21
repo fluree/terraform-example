@@ -40,6 +40,16 @@ terraform apply
 #This will provision Fluree against your Docker Desktop environment
 ```
 
+### You did it!! Fluree should now be running and accessible through the Admin UI at http://localhost:8090
+
+You now have three ledger servers participating as a single Fluree cluster! By default, they're available at http://localhost:8090, http://localhost:8091, or http://localhost:8092. Transacting data against any of them will prompt all three to validate the transaction, establish consensus, and serve that data through their respective HTTP API endpoints.
+
+## Customizing Fluree
+
+Additional environment variables can be passed into your `docker_container` resource block to configure Fluree in specific ways.
+
+Information regarding configurable Fluree settings is available [here](https://developers.flur.ee/docs/reference/fluree_config/).
+
 > Note: Docker Desktop RAM defaults may be too low for running Fluree in a multi-node
 > configuration locally. We generally recommend 2-3GB of RAM per node, so for this example,
 > 8GB should suffice.
@@ -55,13 +65,7 @@ variable "ledger_count" {
 ...
 ```
 
-## Customizing Fluree
-
-Additional environment variables can be passed into your `docker_container` resource block to configure Fluree in specific ways.
-
-Information regarding configurable Fluree settings is available [here](https://developers.flur.ee/docs/reference/fluree_config/).
-
-## Verify container
+## Additional Fluree Management
 
 By default, you should be able to access the Admin UI for any of your Terraform-provisioned Fluree instances by navigating to http://localhost:8090, http://localhost:8091, or http://localhost:8092
 
