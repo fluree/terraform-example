@@ -1,6 +1,6 @@
-# Fluree Terraform Docker Example
+# Fluree Terraform Example
 
-This project provides an example of how to use Terraform to deploy Fluree as a 3-node transactor group against Docker
+This project provides an example of how to use Terraform to deploy Fluree as a 3-node transactor group against the Docker Desktop daemon.
 
 ## Get Started
 
