@@ -7,9 +7,14 @@ terraform {
   }
 }
 
-provider "docker" {}
+provider "docker" {
+  host    = "npipe:////.//pipe//docker_engine"
+}
 
 locals {
+  root_path_tmp = "/${replace(abspath(path.root), ":", "")}"
+  root_path     = "${replace(local.root_path_tmp, "////", "/")}"
+
   fdb_group_servers = <<EOT
 fdb_group_servers=
 %{~for index in range(var.ledger_count)~}
@@ -36,7 +41,7 @@ resource "docker_container" "ledger" {
   }
   volumes {
     container_path = var.container_path
-    host_path      = "${path.cwd}/data/ledger${count.index + 1}"
+    host_path      = "${local.root_path}/data/ledger${count.index + 1}"
   }
   ports {
     internal = 8090
@@ -52,4 +57,3 @@ resource "docker_container" "ledger" {
     "fdb_group_port=9790"
   ]
 }
-
