@@ -11,16 +11,16 @@ provider "docker" {}
 
 locals {
   fdb_group_servers = <<EOT
-fdb_group_servers=
-%{~for index in range(var.ledger_count)~}
-server${index + 1}@ledger${index + 1}:${9790 + index},
-%{~endfor~}
-EOT
+        fdb_group_servers=
+        %{~for index in range(var.ledger_count)~}
+        server${index + 1}@ledger${index + 1}:${9790 + index},
+        %{~endfor~}
+    EOT
 }
 
 resource "docker_image" "fluree" {
   name         = var.image_name
-  keep_locally = false
+  keep_locally = true
 }
 
 resource "docker_network" "fluree_network" {
